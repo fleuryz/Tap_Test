@@ -8,5 +8,7 @@ in which one fare information is added by line from the CSV. Each fare can have 
 
 The final price is calculated after selecting a fare and a driver or selecting the "Best" value for the driver, in which the cheapest fare value will be found.
 
+By clicking "Export Fare CSV" all the fares are saved as a CSV in which each line has the value followed by the information of the driver of which the fare is the lowest.
+
 Video of the tool working:
-https://youtu.be/iljW1lfvYR8
+https://youtu.be/oPnlefRreXE
