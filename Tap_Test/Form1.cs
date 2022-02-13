@@ -43,8 +43,10 @@ namespace Tap_Test
                         addedFaresList.Add(eachFare);
                     }
                     calculateFareButton.Enabled = fareList.Items.Count > 0 && driversList.Items.Count > 0;
+                    exportCSVButton.Enabled = calculateFareButton.Enabled;
 
-                    
+
+
                 }
                 catch (FieldAccessException ex)
                 {
@@ -114,6 +116,7 @@ namespace Tap_Test
             addDriverButton.Enabled = !activate;
             loadCsvButton.Enabled = !activate;
             calculateFareButton.Enabled = !activate && (fareList.Items.Count > 0 && driversList.Items.Count > 0);
+            exportCSVButton.Enabled = calculateFareButton.Enabled;
             addPushButton.Enabled = activate;
             cancelButton.Enabled = activate;
         }
@@ -136,6 +139,24 @@ namespace Tap_Test
                     return VehicleType.TAXI;
                 default:
                     throw new ArgumentException("Unavailable vehicle type");
+            }
+        }
+
+        private void exportCSV_Click(object sender, EventArgs e)
+        {;
+            saveCSVDialog.Filter = "CSV File|*.csv";
+            saveCSVDialog.Title = "Save a CSV File";
+            saveCSVDialog.ShowDialog();
+
+            var fareResults = new List<string>();
+            foreach(var eachFare in addedFaresList)
+            {
+                fareResults.Add(addedDriversList.FindLowestFareSaveString(eachFare));
+            }
+
+            if (saveCSVDialog.FileName != "")
+            {
+                FileManager.SaveFaresCsv(saveCSVDialog.FileName, fareResults);
             }
         }
     }

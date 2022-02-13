@@ -22,11 +22,11 @@ namespace Tap_Test
 		public VehicleType Type { get; set; }
 		public int BaseFarePrice { get; set; }
 		public int BaseFareDistance { get; set; }
-		public Dictionary<FareInfo, float> SavedFares { get; set; }
+		public Dictionary<FareInfo, int> SavedFares { get; set; }
 
 		public VehicleDriver(string name, string surname, string email, VehicleType type, int baseFarePrice, int baseFareDistance)
 		{
-			SavedFares = new Dictionary<FareInfo, float>();
+			SavedFares = new Dictionary<FareInfo, int>();
 			Name = name;
 			Surname = surname;
 			Email = email;
@@ -36,14 +36,14 @@ namespace Tap_Test
 
 		}
 
-		public float GetCost(FareInfo fareInfo)
+		public int GetCost(FareInfo fareInfo)
 		{
-            if (SavedFares.TryGetValue(fareInfo, out float farePrice))
+            if (SavedFares.TryGetValue(fareInfo, out int farePrice))
                 return farePrice;
             switch (Type)
 			{
 				case VehicleType.TAXI:
-					farePrice = BaseFarePrice + GetDistanceTraveledByUnit(fareInfo.DistanceTraveled, fareInfo.TravelUnit) * fareInfo.CostPerDistance;
+					farePrice = BaseFarePrice + (int)Math.Floor((float)GetDistanceTraveledByUnit(fareInfo.DistanceTraveled, fareInfo.TravelUnit) * (float)fareInfo.CostPerDistance);
 					SavedFares.Add(fareInfo, farePrice);
 					return farePrice;
 				default:
@@ -58,7 +58,7 @@ namespace Tap_Test
 
         public override string ToString() => $"{Surname}, {Name} ({Email}): {Type} driver. Base Distance: {BaseFareDistance} | Base Price: {BaseFarePrice}";
 
-		public string ToSaveString() => $"{Surname},{Name},{Email},{Type},{BaseFarePrice},{BaseFareDistance}\n";
+		public string ToSaveString() => $"{Surname},{Name},{Email},{Type},{BaseFarePrice},{BaseFareDistance}";
 
 		public string ToListString() => $"{Surname}, {Name}: {Type} driver";
 

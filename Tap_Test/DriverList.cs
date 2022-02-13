@@ -21,7 +21,7 @@ namespace Tap_Test
 			Drivers.Add(driver);
         }
 
-		public (float, string) FindLowestFare( FareInfo fare, VehicleType type = VehicleType.ANY)
+		public (float, string) FindLowestFare(FareInfo fare, VehicleType type = VehicleType.ANY)
         {
             try
             {
@@ -38,6 +38,21 @@ namespace Tap_Test
         {
 			return Drivers[index];
         }
+
+		public string FindLowestFareSaveString(FareInfo fare, VehicleType type = VehicleType.ANY)
+        {
+			try
+			{
+				VehicleDriver driver = Drivers.Where(x => type == VehicleType.ANY || x.Type == type).OrderBy(driver => driver.GetCost(fare)).First();
+				var cost = driver.GetCost(fare);
+				var driverString = driver.ToSaveString();
+				return $"{cost},{driverString}";
+			}
+			catch
+			{
+				throw new Exception("No drivers available.");
+			}
+		}
 
 
 	}

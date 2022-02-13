@@ -57,6 +57,8 @@ namespace Tap_Test
             this.driverLabel = new System.Windows.Forms.Label();
             this.cancelButton = new System.Windows.Forms.Button();
             this.driversList = new System.Windows.Forms.CheckedListBox();
+            this.exportCSVButton = new System.Windows.Forms.Button();
+            this.saveCSVDialog = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // addDriverButton
@@ -217,7 +219,6 @@ namespace Tap_Test
             this.fareList.Name = "fareList";
             this.fareList.Size = new System.Drawing.Size(216, 130);
             this.fareList.TabIndex = 16;
-            this.fareList.SelectedIndexChanged += new System.EventHandler(this.fareList_SelectedIndexChanged);
             // 
             // calculateFareButton
             // 
@@ -305,11 +306,27 @@ namespace Tap_Test
             this.driversList.Size = new System.Drawing.Size(216, 130);
             this.driversList.TabIndex = 26;
             // 
+            // exportCSVButton
+            // 
+            this.exportCSVButton.Enabled = false;
+            this.exportCSVButton.Location = new System.Drawing.Point(526, 304);
+            this.exportCSVButton.Name = "exportCSVButton";
+            this.exportCSVButton.Size = new System.Drawing.Size(216, 101);
+            this.exportCSVButton.TabIndex = 27;
+            this.exportCSVButton.Text = "Export Fare CSV";
+            this.exportCSVButton.UseVisualStyleBackColor = true;
+            this.exportCSVButton.Click += new System.EventHandler(this.exportCSV_Click);
+            // 
+            // saveCSVDialog
+            // 
+            this.saveCSVDialog.FileName = "cheapestFares.csv";
+            // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.exportCSVButton);
             this.Controls.Add(this.driversList);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.driverChosen);
@@ -370,6 +387,8 @@ namespace Tap_Test
         private System.Windows.Forms.Label driverLabel;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.CheckedListBox driversList;
+        private Button exportCSVButton;
+        private SaveFileDialog saveCSVDialog;
     }
 }
 

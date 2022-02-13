@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace Tap_Test
 {
@@ -27,6 +28,17 @@ namespace Tap_Test
                 }
             }
             return fares;
+        }
+
+        public static void SaveFaresCsv(string fileLocation, List<string> fares)
+        {
+            var faresCsv = new StringBuilder();
+            foreach(var eachFare in fares)
+            {
+                faresCsv.AppendLine(eachFare);
+            }
+
+            File.WriteAllText(fileLocation, faresCsv.ToString());
         }
     }
 }
